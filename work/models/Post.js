@@ -12,6 +12,14 @@ Post.init(
         content: {
             type: DataTypes.TEXT,
             allowNull: false,
-        }
+        },
+    },
+    {
+        sequelize,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'post',
     }
-)
+);
+
+module.exports = Post;

@@ -30,9 +30,12 @@ router.get('/editpost', (req, res) => {
 
 // Login route
 router.get('/login', (req, res) => {
-    res.render('login', {
-        loggedIn: req.session.loggedIn
-    });
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+
+    res.render('login');
 });
 
 // newpost route
