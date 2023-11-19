@@ -26,8 +26,8 @@ User.init(
             allowNull: false,
             validate: {
                 len: [4]
-            },
-        },
+            }
+        }
     },
     {
         hooks: {
@@ -41,8 +41,11 @@ User.init(
             }
         },
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'user'
     }
 )
+
+module.exports = User
