@@ -26,7 +26,15 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'comment_text','created_at']
+                attributes: ['id', 'title', 'post_text','created_at']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: Post,
+                    attributes: ['title']
+                }
             }
         ]
     })
@@ -66,35 +74,34 @@ router.post('/', (req, res) => {
 
 // login route
 router.post('/login', async (req, res) => {
-    try {
-        const userData = await User.findOne({ 
-            where: { 
-                email: req.body.email 
-            }
-        })
-        if (!userData) {
-            res
-            .status(400)
-            .json({ message: 'Incorrect email or password, please try again' });
-            return;
+    User.findOne({ 
+        where: { 
+            email: req.body.email 
         }
-        const validPassword = await userData.checkPassword(req.body.password);
-        if (!validPassword) {
-            res
-            .status(400)
-            .json({ message: 'Incorrect email or password, please try again' });
-            return;
-        }
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.username = dbUserData.username;
-            req.session.logged_in = true;
-        
-            res.json({ user: userData, message: 'You are now logged in!' });
-        });
-    } catch (err) {
-        res.status(400).json(err);
+    })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user with that email address!' });
+        return;
     }
+    const validPassword = dbUserData.checkPassword(req.body.password);
+    if (!validPassword) {
+        res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+        return;
+    }
+    req.session.save(() => {
+        req.session.user_id = userData.id;
+        req.session.username = dbUserData.username;
+        req.session.logged_in = true;
+    
+        res.json({ user: userData, message: 'You are now logged in!' });
+    });
+}).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+});
 });
 
 // logout route
@@ -129,8 +136,6 @@ router.put('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
-
-
 
 // DELETE /api/users/:id
 router.delete('/:id', (req, res) => {
