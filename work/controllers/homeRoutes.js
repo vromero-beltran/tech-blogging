@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Post, Comment, User } = require('../models');
 
 // Home route
 router.get('/', (req, res) => {
@@ -82,3 +83,5 @@ router.get('/signup', (req, res) => {
         loggedIn: req.session.loggedIn
     });
 });
+
+module.exports = router;
