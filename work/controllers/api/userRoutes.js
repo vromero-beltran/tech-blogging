@@ -76,12 +76,12 @@ router.post('/', (req, res) => {
 router.post('/login', async (req, res) => {
     User.findOne({ 
         where: { 
-            email: req.body.email 
+            username: req.body.username 
         }
     })
     .then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that email address!' });
+            res.status(400).json({ message: 'No user with that username!' });
         return;
     }
     const validPassword = dbUserData.checkPassword(req.body.password);
@@ -115,47 +115,5 @@ router.post('/logout', (req, res) => {
     }
 });
 
-// PUT /api/users/:id
-router.put('/:id', (req, res) => {
-    // logic to update a user
-    User.update(req.body, {
-        individualHooks: true,
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(dbCommentsData => {
-            if (!dbCommentsData) {
-                res.status(404).json({ message: 'No comments found with this id' });
-                return;
-            }
-            res.json(dbCommentsData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
-// DELETE /api/users/:id
-router.delete('/:id', (req, res) => {
-    // logic to delete a user
-    User.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(dbUserData => {
-            if (!dbUserData) {
-                res.status(404).json({ message: 'No comments found with this id' });
-                return;
-            };
-            res.json(dbUserData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
 
 module.exports = router;

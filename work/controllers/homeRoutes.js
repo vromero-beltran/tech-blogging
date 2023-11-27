@@ -54,7 +54,7 @@ router.get('/dashboard', (req, res) => {
 });
 
 // editpost route
-router.get('/editpost', (req, res) => {
+router.get('/edit-post', (req, res) => {
     res.render('editpost', {
         loggedIn: req.session.loggedIn
     });
@@ -71,7 +71,7 @@ router.get('/login', (req, res) => {
 });
 
 // newpost route
-router.get('/newpost', (req, res) => {
+router.get('/new-post', (req, res) => {
     res.render('newpost', {
         loggedIn: req.session.loggedIn
     });
