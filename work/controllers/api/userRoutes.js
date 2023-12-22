@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'title', 'post_text','created_at']
+                attributes: ['id', 'title', 'content','created_at']
             },
             {
                 model: Comment,
@@ -92,11 +92,11 @@ router.post('/login', async (req, res) => {
         return;
     }
     req.session.save(() => {
-        req.session.user_id = userData.id;
+        req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.logged_in = true;
     
-        res.json({ user: userData, message: 'You are now logged in!' });
+        res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
 }).catch(err => {
     console.log(err);

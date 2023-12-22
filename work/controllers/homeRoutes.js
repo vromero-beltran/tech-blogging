@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     attributes: [
       'id',
       'title',
-      "post_text",
+      "content",
       'created_at'      
     ],
     include: [
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
     .then(dbPostData => {
       const posts = dbPostData.map(post => post.get({ plain: true }));
       // pass a single post object into the homepage template
-      res.render('homepage', { 
+      res.render('login', { 
         posts,
         loggedIn: req.session.loggedIn 
       });
@@ -49,7 +49,7 @@ router.get('/post/:id', (req, res) => {
     attributes: [
       'id',
       'title',
-      "post_text",
+      "content",
       'created_at'
     ],
     include: [
@@ -97,9 +97,11 @@ router.get('/login', (req, res) => {
 
 // signup route
 router.get('/signup', (req, res) => {
-    res.render('dashboard', {
-        loggedIn: req.session.loggedIn
-    });
+  if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
 });
 
 module.exports = router;

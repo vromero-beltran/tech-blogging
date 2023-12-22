@@ -1,5 +1,17 @@
-const { Model, DataTypes } = require('sequelize');
+// Post Model Definition and Database Synchronization
+const {
+    Model,
+    DataTypes
+} = require('sequelize');
 const sequelize = require('../config/connection');
+
+sequelize.sync({ force: false }) // Set force to true to drop and recreate tables (use with caution)
+    .then(() => {
+        console.log('Database and tables are synchronized.');
+    })
+    .catch((error) => {
+        console.error('Error synchronizing the database:', error);
+    }); 
 
 class Post extends Model {}
 
@@ -13,11 +25,17 @@ Post.init(
         },
     title: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            len: [1]
+        }
     },
-    post_text: {
+    content: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            len: [1]
+        }
     },
     user_id: {
         type: DataTypes.INTEGER,

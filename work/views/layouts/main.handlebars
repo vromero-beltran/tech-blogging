@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,32 +7,26 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <header>
-            <div>
-                <nav>
-                    <a href="/">Home</a>
-                    <a href="/dashboard">Dashboard</a>
-                    {{#if loggedIn}}
-                    <a href="/" id="logout">Logout</a>
-                    {{else}}
-                    <a href="/login">Login</a>
-                    {{/if}}
-                </nav>
-            </div>
-            <div>
-                <h1 class="home-title">Tech Blogging</h1>
-            </div>
-        </header>
-        <main>
-            {{{ body }}}
-        </main>
-        <footer>
-        Thanks for visiting!
-        </footer>
-    </div>
-    {{#if loggedIn}}
+    <header>
+        <nav>
+            <div class="logo"><a href="/">Tech Blogging</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                {{#if loggedIn}}
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/login" class="btn-no-style logout">Logout</a></li>
+                {{else}}
+                <li><a href="/login">Login</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+    </header>
+    <main class="container" >
+        {{{body}}}
+    </main>
     <script src="/js/logout.js"></script>
-    {{/if}}
+    <footer>
+        &copy; 2023 Tech Blogging
+    </footer>
 </body>
 </html>
