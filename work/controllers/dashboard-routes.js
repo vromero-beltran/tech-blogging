@@ -77,6 +77,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
     });
 });
 
+//create a new post
 router.get('/new-post', (req, res) => {
     res.render('new-post', {
         loggedIn: req.session.loggedIn

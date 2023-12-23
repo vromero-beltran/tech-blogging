@@ -84,6 +84,7 @@ router.post("/", withAuth, async (req, res) => {
         user_id: req.session.user_id,
     })
     .then((dbPostData) => res.json(dbPostData))
+    .res.redirect("/dashboard")
     .catch ((err) => {
         console.log(err);
         res.status(500).json(err);
