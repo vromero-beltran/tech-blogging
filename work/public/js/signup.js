@@ -14,8 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (response.ok) {
                 document.location.replace('/');
+                // give user a success message
+                alert('You have successfully signed up.');
             } else {
-                alert('Failed to sign up.');
+                alert(response.statusText);
+                console.log(response);
             }
         }
     };

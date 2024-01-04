@@ -73,12 +73,12 @@ router.get('/edit/:id', withAuth, (req, res) => {
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json(err);
+        res.status(500).send({message: 'Failed to get post'});
     });
 });
 
-//create a new post
-router.get('/new-post', (req, res) => {
+//get new post to render on dashboard
+router.get('/new-post', withAuth, (req, res) => {
     res.render('new-post', {
         loggedIn: req.session.loggedIn
     })
