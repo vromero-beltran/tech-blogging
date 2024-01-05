@@ -17,7 +17,7 @@ router.get('/', withAuth, (req, res) => {
 });
 
 // Get a single user by id number
-router.get('/:id', (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
         where: {
@@ -52,7 +52,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a new user
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     // logic to create a new user
     User.create({
         username: req.body.username,

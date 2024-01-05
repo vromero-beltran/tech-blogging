@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
             });
             if (response.ok) {
-                document.location.replace('/');
+                document.location.replace('/dashboard');
                 // give user a success message
                 alert('You have successfully signed up.');
             } else {
