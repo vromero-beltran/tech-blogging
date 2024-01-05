@@ -7,7 +7,6 @@
   - [Usage](#usage)
   - [Acceptance Criteria](#acceptance-criteria)
   - [Contributing](#contributing)
-  - [Tests](#tests)
   - [Questions](#questions)
   ## Installation
   The following necessary dependencies must be installed to run the application, sequelize seeds mysql2 express-session express-handlebars express dotenv crypto connect-session-sequelize  bcrypt
@@ -56,8 +55,6 @@ THEN I am able to view posts and comments but I am prompted to log in again befo
   The license link can be found here https://opensource.org/licenses/MIT.
   ## Contributing
   Contributors: Victor Romero-Beltran
-  ## Tests
-  The following is needed in order to run the test: sequelize seeds mysql2 express-session express-handlebars    express dotenv crypto connect-session-sequelize  bcryptA
   ## Questions
-  If you have any other questions about this project, please contact me directly at vromero.beltran2016@gmail.com or through GitHub at https://github.com/vromero-beltran. I have been working on this application over a month and its been nothing but a headace. I hope you can see some insight of what I have been working on and use what you can to improve your own skills.
+  If you have any other questions about this project, please contact me directly at vromero.beltran2016@gmail.com or through GitHub at https://github.com/vromero-beltran. I have been working on this application for over a month and it's been nothing but a headache. I hope you can see some insight into what I have been working on and use what you can to improve your skills.
   
