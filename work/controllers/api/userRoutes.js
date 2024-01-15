@@ -3,7 +3,7 @@ const router = require('express').Router();
 const withAuth = require('../../utiles/auth');
 
 // get All users
-router.get('/', withAuth, (req, res) => {
+router.get('/', (req, res) => {
     User.findAll({
         attributes: {
             exclude: ['password']
@@ -17,7 +17,7 @@ router.get('/', withAuth, (req, res) => {
 });
 
 // Get a single user by id number
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
         where: {
@@ -52,7 +52,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // Create a new user
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
     // logic to create a new user
     User.create({
         username: req.body.username,
@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
 });
 
 // login route
-router.post('/login', async (req, res) => {
+router.post('/login', (req, res) => {
     User.findOne({ 
         where: { 
             username: req.body.username 
@@ -88,7 +88,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
         res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Incorrect password, please try again' });
         return;
     }
     req.session.save(() => {
