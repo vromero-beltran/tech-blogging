@@ -3,7 +3,7 @@ const {
     Model,
     DataTypes
 } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../../config/connection');
 
 sequelize.sync({ force: false }) // Set force to true to drop and recreate tables (use with caution)
     .then(() => {
