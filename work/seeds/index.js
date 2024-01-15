@@ -9,7 +9,7 @@ const seedDatabase = async() => {
     await sequelize.sync({force: true});
     await User.bulkCreate(user);
     await Post.bulkCreate(post);
-    await Comment.bulkCreate(comment);
+    await Comments.bulkCreate(comment);
     process.exit(0);
 };
 
